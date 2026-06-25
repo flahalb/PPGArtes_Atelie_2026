@@ -19,23 +19,48 @@ trackingMethod: best;
 sourceType: webcam;
 debugUIEnabled: false;">
 
+<a-assets>
+<video
+        id="video"
+        src="Lamparina_3d.mp4"
+        preload="auto"
+        crossorigin="anonymous"
+        loop
+        muted
+        autoplay
+        playsinline
+        webkit-playsinline>
+    </video>
+</a-assets>
 
 <a-marker preset="hiro">
 
-    <a-box
-        position="0 0.5 0"
-        color="red"
-        depth="0.5"
-        height="0.5"
-        width="0.5">
-    </a-box>
-
+<a-video
+    src="#video"
+    width="1.12"
+    height="2"
+    position="0 1 -0.3"
+    rotation="-90 0 0">
+</a-video>
 </a-marker>
 
 <a-entity camera></a-entity>
 
 </a-scene>
 
+<script>
+const marker = document.querySelector('a-marker');
+const video = document.querySelector('#video');
+
+marker.addEventListener('markerFound', function() {
+    video.currentTime = 0;
+    video.play();
+});
+
+marker.addEventListener('markerLost', function() {
+    video.pause();
+});
+</script>
 
 </body>
 </html>
